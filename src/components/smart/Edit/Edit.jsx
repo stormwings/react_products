@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 
 const Edit = props => {
   const [product, setProduct] = useState(null);
@@ -46,20 +47,45 @@ const Edit = props => {
   if (!product) return <div>loading</div>;
 
   return (
-    <form
-      onSubmit={event => {
-        event.preventDefault();
+    <Container>
+      <h1 style={{ marginTop: '30px' }}>Edit Product</h1>
 
-        updateProduct(product.id, product);
-      }}
-    >
-      <label>Name</label>
-      <input type="text" name="product" value={product.product} onChange={handleInputChange} />
-      <label>Price</label>
-      <input type="text" name="price" value={product.price} onChange={handleInputChange} />
-      <button>Update product</button>
-      <button className="button muted-button">Cancel</button>
-    </form>
+      <Form
+        onSubmit={event => {
+          event.preventDefault();
+
+          updateProduct(product.id, product);
+        }}
+      >
+        <FormGroup>
+          <Label for="product">Name</Label>
+          <Input
+            type="text"
+            id="product"
+            name="product"
+            placeholder="Your product name"
+            value={product.product}
+            onChange={handleInputChange}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label for="price">Price</Label>
+          <Input type="text" id="price" name="price" placeholder="Your product Price" value={product.price} onChange={handleInputChange} />
+        </FormGroup>
+        <Button color="primary">Add new product</Button>
+        <Button
+          outline
+          onClick={() => {
+            props.history.push({
+              pathname: '/'
+            });
+          }}
+          style={{ marginLeft: '10px' }}
+        >
+          Cancel
+        </Button>
+      </Form>
+    </Container>
   );
 };
 

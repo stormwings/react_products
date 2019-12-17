@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Button, Table } from 'reactstrap';
 
 export default function List(props) {
   const [products, setProducts] = useState(null);
@@ -30,9 +31,12 @@ export default function List(props) {
 
   return (
     <div className="container">
-      <h1>CRUD Products</h1>
+      <h1 style={{ marginTop: '30px' }}>CRUD Products</h1>
       <div className="flex-row">
-        <button
+        <Button
+          style={{ margin: '10px 0 20px' }}
+          outline
+          color="info"
           onClick={() => {
             props.history.push({
               pathname: '/product',
@@ -40,12 +44,9 @@ export default function List(props) {
             });
           }}
         >
-          add
-        </button>
-        <div className="flex-large">
-          <h2>View products</h2>
-          {products && <ProductTable products={products} deleteProduct={deleteProduct} />}
-        </div>
+          Create Product
+        </Button>
+        <div className="flex-large">{products && <ProductTable products={products} deleteProduct={deleteProduct} />}</div>
       </div>
     </div>
   );
@@ -55,7 +56,7 @@ const ProductTable = props => {
   const history = useHistory();
 
   return (
-    <table>
+    <Table>
       <thead>
         <tr>
           <th>Name</th>
@@ -70,17 +71,19 @@ const ProductTable = props => {
               <td>{product.product}</td>
               <td>{product.price}</td>
               <td>
-                <button
+                <Button
+                  style={{ marginRight: '10px' }}
+                  outline
+                  color="primary"
                   onClick={() => {
                     history.push(`/product/${product.id}`);
                   }}
-                  className="button muted-button"
                 >
                   Edit
-                </button>
-                <button onClick={() => props.deleteProduct(product.id)} className="button muted-button">
+                </Button>
+                <Button outline color="danger" onClick={() => props.deleteProduct(product.id)}>
                   Delete
-                </button>
+                </Button>
               </td>
             </tr>
           ))
@@ -90,6 +93,6 @@ const ProductTable = props => {
           </tr>
         )}
       </tbody>
-    </table>
+    </Table>
   );
 };
