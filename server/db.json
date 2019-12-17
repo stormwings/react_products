@@ -1,0 +1,19 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "product": "Gorgeous Plastic Sausages",
+      "price": "U$D593.00"
+    },
+    {
+      "id": 2,
+      "product": "Licensed Fresh Salad",
+      "price": "U$D504.00"
+    },
+    {
+      "id": 5,
+      "product": "Mariano test",
+      "price": "500U$D"
+    }
+  ]
+}
